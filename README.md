@@ -34,13 +34,19 @@ git clone https://github.com/gazievri/gazpromneft.git
 npm install
 ```
 
-3. Запустить mock server:
+3. Установить mock server:
+
+```
+npm install -g @mockoon/cli
+```
+
+4. Запустить mock server:
 
 ```
 mockoon-cli start --data mock.json
 ```
 
-4. Запустить проект:
+5. Запустить проект:
 
 ```
 npm run dev
