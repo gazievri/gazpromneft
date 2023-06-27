@@ -4,5 +4,5 @@ export interface IData {
     quantity: number;
     price: number;
     currency: string;
-    deliveryDate: any;
+    deliveryDate: number | string;
 }
