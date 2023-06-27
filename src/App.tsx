@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setData } from './store/dataSlice';
 import { BASE_URL } from './utils/constants';
+import { sortDate } from './helpers/sortDate';
 
 
 function App() {
@@ -18,7 +19,7 @@ function App() {
         const responses = await Promise.all([promise1, promise2]);
         const jsonData = await Promise.all(responses.map(response => response.json()));
 
-        dispatch(setData(jsonData.flat()))
+        dispatch(setData( sortDate( jsonData.flat())));
       } catch (error) {
         console.error('Error:', error);
       }

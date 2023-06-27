@@ -25,7 +25,7 @@ export const Modal: React.FC = () => {
                     body: JSON.stringify(ids)
                 });
 
-                const data = response.json();
+                const data = await response.json();
 
                 console.log('Данные успешно отправлены!!!', data)
 

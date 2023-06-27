@@ -32,6 +32,7 @@ export const Table: React.FC = () => {
             title: 'Дата доставки',
             dataIndex: 'deliveryDate',
             key: 'deliveryDate',
+            sorter: (a: IData, b: IData) => new Date(a.deliveryDate).getTime() - new Date(b.deliveryDate).getTime() 
         },
         {
             title: 'Цена',
@@ -46,6 +47,7 @@ export const Table: React.FC = () => {
             sorter: (a: IData, b: IData) => a.currency.localeCompare(b.currency),
         },
     ];
+
 
     // 
     const rowSelection = {
