@@ -2,37 +2,31 @@ import { useEffect, useState } from 'react';
 import { Table as TableAntd, Button, Typography, Space } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { useDispatch, useSelector } from 'react-redux';
-import { openModal } from '../../store/modalSlice';
-import { setSelectedData } from '../../store/dataSlice';
+import { openModal } from '../store/modalSlice';
+import { setSelectedData } from '../store/dataSlice';
+import type { IData } from '../types/dataType';
+import type { RootState } from '../store';
 
-interface DataType {
-    key: React.Key;
-    name: string;
-    quantity: number;
-    price: number;
-    currency: string;
-    deliveryDate: string;
-}
 
 export const Table: React.FC = () => {
-    const dataSource = useSelector(state => state.data.data)
-    const [selectedRows, setSelectedRows] = useState<DataType[]>([]);
-    const [total, setTotal] = useState(0)
-    const dispatch = useDispatch()
+    const dataSource = useSelector((state: RootState) => state.data.data)
+    const [selectedRows, setSelectedRows] = useState<IData[]>([]);
+    const [total, setTotal] = useState(0);
+    const dispatch = useDispatch();
 
     // Данные для заголовков таблицы
-    const columns: ColumnsType<DataType> = [
+    const columns: ColumnsType<IData> = [
         {
             title: 'Имя',
             dataIndex: 'name',
             key: 'name',
-            sorter: (a, b) => a.name.localeCompare(b.name),
+            sorter: (a: IData, b: IData) => a.name.localeCompare(b.name),
         },
         {
             title: 'Количество',
             dataIndex: 'quantity',
             key: 'quantity',
-            sorter: (a, b) => a.quantity - b.quantity,
+            sorter: (a: IData, b: IData) => a.quantity - b.quantity,
         },
         {
             title: 'Дата доставки',
@@ -43,19 +37,19 @@ export const Table: React.FC = () => {
             title: 'Цена',
             dataIndex: 'price',
             key: 'price',
-            sorter: (a, b) => a.price - b.price,
+            sorter: (a: IData, b: IData) => a.price - b.price,
         },
         {
             title: 'Валюта',
             dataIndex: 'currency',
             key: 'currency',
-            sorter: (a, b) => a.currency.localeCompare(b.currency),
+            sorter: (a: IData, b: IData) => a.currency.localeCompare(b.currency),
         },
     ];
 
     // 
     const rowSelection = {
-        onChange: (_selectedRowKeys: React.Key[], selectedRows: DataType[]) => {
+        onChange: (_selectedRowKeys: React.Key[], selectedRows: IData[]) => {
             setSelectedRows(selectedRows)
         },
     };
@@ -68,7 +62,7 @@ export const Table: React.FC = () => {
 
     useEffect(() => {
         if (selectedRows.length !== 0) {
-            const sum = selectedRows.reduce((sum, row) => sum + row.quantity, 0);
+            const sum = selectedRows.reduce((sum: number, row: IData) => sum + row.quantity, 0);
             setTotal(sum);
         } else {
             setTotal(0)

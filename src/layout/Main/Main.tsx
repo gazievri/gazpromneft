@@ -1,6 +1,6 @@
 import styles from './Main.module.sass'
-import { Table } from '../../components/Table/Table'
-import { Modal } from '../../components/Modal/Modal'
+import { Table } from '../../components/Table'
+import { Modal } from '../../components/Modal'
 
 export const Main: React.FC = () => {
     return (

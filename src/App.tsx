@@ -1,20 +1,31 @@
 import './styles/@globals.sass';
 import { Header } from './layout/Header/Header';
 import { Main } from './layout/Main/Main';
-import { getData } from './utils/api'
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setData } from './store/dataSlice';
+import { BASE_URL } from './utils/constants';
 
 
 function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    getData().then(res => {
-      dispatch(setData(res))
-    }).catch(err => console.log(err))
-  }, [])
+    const fetchData = async () => {
+      try {
+        const promise1 = fetch(`${BASE_URL}/documents1`);
+        const promise2 = fetch(`${BASE_URL}/documents2`);
+        const responses = await Promise.all([promise1, promise2]);
+        const jsonData = await Promise.all(responses.map(response => response.json()));
+
+        dispatch(setData(jsonData.flat()))
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <>
