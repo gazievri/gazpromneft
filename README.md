@@ -34,7 +34,7 @@ git clone https://github.com/gazievri/gazpromneft.git
 npm install
 ```
 
-3. Запустить проект:
+3. Запустить проект (скрипт одновременно запустит и mockoon):
 
 ```
 npm run dev
