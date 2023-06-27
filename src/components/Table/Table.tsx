@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
-import { Table as TableAntd, Button, Divider, Typography, Space } from 'antd';
+import { Table as TableAntd, Button, Typography, Space } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
+import { useDispatch, useSelector } from 'react-redux';
+import { openModal } from '../../store/modalSlice';
+import { setSelectedData } from '../../store/dataSlice';
 
 interface DataType {
     key: React.Key;
@@ -12,27 +15,10 @@ interface DataType {
 }
 
 export const Table: React.FC = () => {
+    const dataSource = useSelector(state => state.data.data)
     const [selectedRows, setSelectedRows] = useState<DataType[]>([]);
     const [total, setTotal] = useState(0)
-
-    const dataSource = [
-        {
-            key: '1',
-            name: 'Mike',
-            quantity: 32,
-            price: 1000,
-            currency: 'RUB',
-            deliveryDate: "01.02.2023"
-        },
-        {
-            key: '2',
-            name: 'John',
-            quantity: 40,
-            price: 1100,
-            currency: 'USD',
-            deliveryDate: "12.02.2023"
-        },
-    ];
+    const dispatch = useDispatch()
 
     // Данные для заголовков таблицы
     const columns: ColumnsType<DataType> = [
@@ -67,14 +53,17 @@ export const Table: React.FC = () => {
         },
     ];
 
+    // 
     const rowSelection = {
         onChange: (_selectedRowKeys: React.Key[], selectedRows: DataType[]) => {
             setSelectedRows(selectedRows)
         },
     };
 
+    // Обработчик клика по кнопке Анулировать
     const handleClick = () => {
-        alert('!!!')
+        dispatch(setSelectedData(selectedRows))
+        dispatch(openModal())
     }
 
     useEffect(() => {
@@ -88,7 +77,7 @@ export const Table: React.FC = () => {
 
     return (
         <Space direction='vertical' style={{ display: 'flex' }}>
-            <TableAntd dataSource={dataSource} columns={columns} pagination={false} rowSelection={rowSelection} />
+            <TableAntd dataSource={dataSource} columns={columns} pagination={false} rowSelection={rowSelection} rowKey="id" />
             <Typography.Text strong>Общее количество: {total}</Typography.Text>
             {
                 total > 0 && <Button type="primary" onClick={handleClick}>Аннулировать</Button>
