@@ -1,0 +1,169 @@
+{
+  "uuid": "2d37ed2a-54db-4bfc-aba3-ad130535ca46",
+  "lastMigration": 27,
+  "name": "gp",
+  "endpointPrefix": "",
+  "latency": 0,
+  "port": 3000,
+  "hostname": "",
+  "folders": [],
+  "routes": [
+    {
+      "uuid": "f2179839-2e70-4580-ac11-fdd893fa55e1",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "documents1",
+      "responses": [
+        {
+          "uuid": "08f8693b-13df-4af6-a3b2-2561fdde44c5",
+          "body": "[\n  {{#repeat 5}}\n    {\n      \"id\": {{faker 'datatype.number'}},\n      \"name\": \"{{faker 'commerce.productName'}}\",\n      \"quantity\": {{int 1 500}},\n      \"price\": {{faker 'commerce.price'}},\n      \"deliveryDate\": \"{{faker 'date.future'}}\",\n      \"currency\": \"{{oneOf (array 'USD' 'RUB')}}\"\n    }\n    {{#unless @last}},{{/unless}}\n  {{/repeat}}\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "f42d5c61-60e6-4605-b9d5-c7a780a788a1",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "documents2",
+      "responses": [
+        {
+          "uuid": "1a49a682-b9bf-4670-9a1b-1d77e789f066",
+          "body": "[\n  {{#repeat 5}}\n    {\n      \"id\": {{faker 'datatype.number'}},\n      \"name\": \"{{faker 'commerce.productName'}}\",\n      \"quantity\": {{int 1 500}},\n      \"price\": {{faker 'commerce.price'}},\n      \"deliveryDate\": \"{{faker 'date.future'}}\",\n      \"currency\": \"{{oneOf (array 'USD' 'RUB')}}\"\n    }\n    {{#unless @last}},{{/unless}}\n  {{/repeat}}\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "cb15d657-33a5-4e17-808f-daa76f825221",
+      "type": "http",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "cancel",
+      "responses": [
+        {
+          "uuid": "2313d3b9-f284-482f-92c9-270241115b63",
+          "body": "{ \"data\": \"{{body}}\" }",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    }
+  ],
+  "rootChildren": [
+    {
+      "type": "route",
+      "uuid": "f2179839-2e70-4580-ac11-fdd893fa55e1"
+    },
+    {
+      "type": "route",
+      "uuid": "f42d5c61-60e6-4605-b9d5-c7a780a788a1"
+    },
+    {
+      "type": "route",
+      "uuid": "cb15d657-33a5-4e17-808f-daa76f825221"
+    }
+  ],
+  "proxyMode": false,
+  "proxyHost": "",
+  "proxyRemovePrefix": false,
+  "tlsOptions": {
+    "enabled": false,
+    "type": "CERT",
+    "pfxPath": "",
+    "certPath": "",
+    "keyPath": "",
+    "caPath": "",
+    "passphrase": ""
+  },
+  "cors": true,
+  "headers": [
+    {
+      "key": "Content-Type",
+      "value": "application/json"
+    },
+    {
+      "key": "Access-Control-Allow-Origin",
+      "value": "*"
+    },
+    {
+      "key": "Access-Control-Allow-Methods",
+      "value": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+    },
+    {
+      "key": "Access-Control-Allow-Headers",
+      "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+    }
+  ],
+  "proxyReqHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "proxyResHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "data": [
+    {
+      "uuid": "999c47aa-b02f-4e20-8f86-de97f7d7d4a4",
+      "id": "ctzw",
+      "name": "Documents1 ",
+      "documentation": "",
+      "value": "[\n  {{#repeat 10}}\n    {\n      \"id\": {{faker 'datatype.number'}},\n      \"name\": \"{{faker 'commerce.productName'}}\",\n      \"description\": \"{{faker 'lorem.paragraph'}}\",\n      \"price\": {{faker 'commerce.price'}},\n      \"category\": \"{{faker 'commerce.department'}}\",\n      \"inStock\": {{faker 'datatype.boolean'}},\n      \"rating\": {{faker 'datatype.number' min=0 max=5}},\n      \"createdAt\": \"{{faker 'date.past'}}\"\n    }\n    {{#unless @last}},{{/unless}}\n  {{/repeat}}\n]"
+    },
+    {
+      "uuid": "edcbf9e8-d9b7-4f75-832b-9650db96ccb1",
+      "id": "9szz",
+      "name": "Ids",
+      "documentation": "",
+      "value": "[]"
+    }
+  ]
+}
